@@ -3,35 +3,32 @@ layout: default
 title: Practice Drill Generator
 ---
 
-<style>
-    .generator-section { margin-bottom: 40px; padding: 20px; border: 1px solid #ddd; border-radius: 8px; }
-    hr { margin: 20px 0; }
-</style>
+<main>
+    <section class="generator-section">
+        <h2>Random Combo Generator</h2>
+        <button id="generate-combos-btn" type="button">Generate 5 Combos</button>
+        <ul id="result-combo">
+            <li>---</li>
+            <li>---</li>
+            <li>---</li>
+            <li>---</li>
+            <li>---</li>
+        </ul>
+    </section>
 
-<div class="generator-section">
-    <h2>Random Combo Generator</h2>
-    <button id="btn-combo" type="button">Generate 5 Combos</button>
-    <ul id="result-combo">
-        <li>---</li>
-        <li>---</li>
-        <li>---</li>
-        <li>---</li>
-        <li>---</li>
-    </ul>
-</div>
-
-<div class="generator-section">
-    <h2>Diatonic Progression Generator</h2>
-    <button id="btn-progression" type="button">Generate Progression</button>
-    <div id="key-display">Key: ---</div>
-    <ul id="result-progression">
-        <li>---</li>
-        <li>---</li>
-        <li>---</li>
-        <li>---</li>
-        <li>---</li>
-    </ul>
-</div>
+    <section class="generator-section">
+        <h2>Diatonic Progression Generator</h2>
+        <button id="generate-progression-btn" type="button">Generate Diatonic Progression</button>
+        <div id="key-display">Key: ---</div>
+        <ul id="result-progression">
+            <li>---</li>
+            <li>---</li>
+            <li>---</li>
+            <li>---</li>
+            <li>---</li>
+        </ul>
+    </section>
+</main>
 
 <script>
     // --- GEN 1 LOGIC ---
@@ -40,7 +37,7 @@ title: Practice Drill Generator
     const listC = ["3rd Str", "4th Str", "5th Str", "6th Str"];
     const listD = ["Major", "Minor", "Diminished", "Whole"];
     
-    document.getElementById("btn-combo").addEventListener("click", () => {
+    document.getElementById("generate-combos-btn").addEventListener("click", () => {
         const listElement = document.getElementById("result-combo");
         listElement.innerHTML = "";
         for (let i = 0; i < 5; i++) {
@@ -67,7 +64,7 @@ title: Practice Drill Generator
     const strings = ["1st Str", "2nd Str", "3rd Str", "4th Str", "5th Str", "6th Str"];
     const inversions = ["Root", "1st Inv", "2nd Inv", "3rd Inv"];
 
-    document.getElementById("btn-progression").addEventListener("click", () => {
+    document.getElementById("generate-progression-btn").addEventListener("click", () => {
         const keys = Object.keys(keyData);
         const randomKey = keys[Math.floor(Math.random() * keys.length)];
         const chordsInKey = keyData[randomKey];
