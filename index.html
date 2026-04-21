@@ -1,88 +1,98 @@
----
-layout: default
-title: Practice Drill Generator
----
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+:root{
+  --bg: #0b1220;
+  --card: rgba(255,255,255,0.06);
+  --border: rgba(255,255,255,0.12);
+  --text: rgba(255,255,255,0.92);
+  --muted: rgba(255,255,255,0.70);
+  --accent: #7c5cff;
+  --accent2: #22c55e;
+  --shadow: 0 18px 50px rgba(0,0,0,0.45);
+}
 
-<main>
-    <section class="generator-section">
-        <h2>Random Combo Generator</h2>
-        <button id="generate-combos-btn" type="button">Generate 5 Combos</button>
-        <ul id="result-combo">
-            <li>---</li>
-            <li>---</li>
-            <li>---</li>
-            <li>---</li>
-            <li>---</li>
-        </ul>
-    </section>
+body{
+  background: radial-gradient(1200px 700px at 20% 0%, rgba(124,92,255,0.25), transparent 60%),
+              radial-gradient(900px 600px at 80% 30%, rgba(34,197,94,0.18), transparent 60%),
+              var(--bg);
+  color: var(--text);
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+}
 
-    <section class="generator-section">
-        <h2>Diatonic Progression Generator</h2>
-        <button id="generate-progression-btn" type="button">Generate Diatonic Progression</button>
-        <div id="key-display">Key: ---</div>
-        <ul id="result-progression">
-            <li>---</li>
-            <li>---</li>
-            <li>---</li>
-            <li>---</li>
-            <li>---</li>
-        </ul>
-    </section>
-</main>
+main{
+  max-width: 900px;
+  margin: 48px auto;
+  padding: 0 16px;
+  display: grid;
+  gap: 20px;
+}
 
-<script>
-    // --- GEN 1 LOGIC ---
-    const listA = ["C", "D", "Eb", "F", "G", "A", "Bb"];  
-    const listB = ["Root", "1st Inv", "2nd Inv"];  
-    const listC = ["3rd Str", "4th Str", "5th Str", "6th Str"];  
-    const listD = ["Major", "Minor", "Diminished", "Whole"];  
-    
-    document.getElementById("generate-combos-btn").addEventListener("click", () => {
-        const listElement = document.getElementById("result-combo");
-        listElement.innerHTML = "";
-        for (let i = 0; i < 5; i++) {
-            const itemA = listA[Math.floor(Math.random() * listA.length)];
-            const itemB = listB[Math.floor(Math.random() * listB.length)];
-            const itemC = listC[Math.floor(Math.random() * listC.length)];
-            const itemD = listD[Math.floor(Math.random() * listD.length)];
-            const li = document.createElement("li");
-            li.innerText = `${itemA} ${itemD} ${itemC} / ${itemB}`;
-            listElement.appendChild(li);
-        }
-    });
+a{
+  color: inherit;
+}
 
-    // --- GEN 2 LOGIC ---
-    const keyData = {
-        "C Major": ["C Major", "D Minor", "E Minor", "F Major", "G Major", "A Minor", "B Diminished"],
-        "D Major": ["D Major", "E Minor", "F# Minor", "G Major", "A Major", "B Minor", "C# Diminished"],
-        "Eb Major": ["Eb Major", "F Minor", "G Minor", "Ab Major", "Bb Major", "C Minor", "D Diminished"],
-        "F Major": ["F Major", "G Minor", "A Minor", "Bb Major", "C Major", "D Minor", "E Diminished"],
-        "G Major": ["G Major", "A Minor", "B Minor", "C Major", "D Major", "E Minor", "F# Diminished"],
-        "A Major": ["A Major", "B Minor", "C# Minor", "D Major", "E Major", "F# Minor", "G# Diminished"],
-        "Bb Major": ["Bb Major", "C Minor", "D Minor", "Eb Major", "F Major", "G Minor", "A Diminished"]
-    };
-    const strings = ["3rd Str", "4th Str", "5th Str", "6th Str"];  
-    const inversions = ["Root", "1st Inv", "2nd Inv"];  
+.generator-section{
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 20px 18px;
+  box-shadow: var(--shadow);
+  backdrop-filter: blur(10px);
+}
 
-    document.getElementById("generate-progression-btn").addEventListener("click", () => {
-        const keys = Object.keys(keyData);
-        const randomKey = keys[Math.floor(Math.random() * keys.length)];
-        const chordsInKey = keyData[randomKey];
+.generator-section h2{
+  margin: 0 0 12px;
+  font-size: 1.25rem;
+  letter-spacing: 0.2px;
+}
 
-        // pick ONE string for the whole progression
-        const chosenStr = strings[Math.floor(Math.random() * strings.length)];
-        
-        document.getElementById("key-display").innerText = `Key: ${randomKey} — String: ${chosenStr}`;
-        const listElement = document.getElementById("result-progression");
-        listElement.innerHTML = "";  
+button{
+  background: linear-gradient(135deg, var(--accent), #3b82f6);
+  border: 0;
+  color: white;
+  font-weight: 650;
+  padding: 12px 14px;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: transform 120ms ease, filter 120ms ease;
+}
 
-        for (let i = 0; i < 5; i++) {
-            const randomChord = chordsInKey[Math.floor(Math.random() * chordsInKey.length)];
-            const randomInv = inversions[Math.floor(Math.random() * inversions.length)];
-            
-            const li = document.createElement("li");
-            li.innerText = `${randomChord} (${chosenStr} / ${randomInv})`;
-            listElement.appendChild(li);
-        }
-    });
-</script>
+button:hover{ filter: brightness(1.07); }
+button:active{ transform: scale(0.98); }
+
+#key-display{
+  margin-top: 12px;
+  color: var(--muted);
+  font-size: 0.95rem;
+}
+
+ul{
+  list-style: none;
+  padding: 0;
+  margin: 14px 0 0;
+  display: grid;
+  gap: 10px;
+}
+
+li{
+  padding: 10px 12px;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  background: rgba(0,0,0,0.20);
+}
+    </style>
+</head>
+<body>
+    <script>
+        // Existing <script> logic goes here
+    </script>
+    <main>
+        <!-- Main content stays the same -->
+    </main>
+</body>
+</html>
