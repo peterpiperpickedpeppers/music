@@ -1,81 +1,39 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Random Combo Generator</title>
-    <style>
-        body { 
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; 
-            display: flex; 
-            flex-direction: column; 
-            align-items: center; 
-            padding-top: 50px;
-            margin: 0;
-            background-color: #f4f4f9;
-        }
-        button { 
-            padding: 15px 30px; 
-            font-size: 18px; 
-            cursor: pointer; 
-            background-color: #007bff; 
-            color: white; 
-            border: none; 
-            border-radius: 8px;
-            transition: background 0.2s;
-            margin-bottom: 20px;
-        }
-        button:hover { background-color: #0056b3; }
-        ul { 
-            list-style-type: none; 
-            padding: 0; 
-            width: 300px;
-        }
-        li { 
-            background: white;
-            margin-bottom: 10px;
-            padding: 15px;
-            border-radius: 8px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-            text-align: center;
-            font-weight: bold;
-            color: #333;
-        }
-    </style>
-</head>
-<body>
+---
+layout: default
+title: Practice Drill Generator
+---
 
-    <h1>Practice Drill Generator</h1>
-    <button onclick="generate()">Generate 5 Combos</button>
-    <ul id="result">
-        <li>---</li>
-        <li>---</li>
-        <li>---</li>
-        <li>---</li>
-        <li>---</li>
-    </ul>
+<button id="generate-button" type="button">Generate 5 Combos</button>
+<ul id="result">
+    <li>---</li>
+    <li>---</li>
+    <li>---</li>
+    <li>---</li>
+    <li>---</li>
+</ul>
 
-    <script>
-        const listA = ["C", "D", "Eb", "F", "G", "A", "Bb"];
-        const listB = ["1st Inv", "2nd Inv", "3rd Inv"];
-        const listC = ["1st Str", "2nd Str", "3rd Str", "4th Str", "5th Str", "6th Str"];
-        const listD = ["Major", "Minor", "Diminished", "Whole"];
+<script>
+    const listA = ["C", "D", "Eb", "F", "G", "A", "Bb"];
+    const listB = ["1st Inv", "2nd Inv", "3rd Inv"];
+    const listC = ["1st Str", "2nd Str", "3rd Str", "4th Str", "5th Str", "6th Str"];
+    const listD = ["Major", "Minor", "Diminished", "Whole"];
+    const generateButton = document.getElementById("generate-button");
 
-        function generate() {
-            const listElement = document.getElementById("result");
-            listElement.innerHTML = ""; // Clear current list
+    function generate() {
+        const listElement = document.getElementById("result");
+        listElement.innerHTML = "";
 
-            for (let i = 0; i < 5; i++) {
-                const itemA = listA[Math.floor(Math.random() * listA.length)];
-                const itemB = listB[Math.floor(Math.random() * listB.length)];
-                const itemC = listC[Math.floor(Math.random() * listC.length)];
-                const itemD = listD[Math.floor(Math.random() * listD.length)];
-                
-                const li = document.createElement("li");
-                li.innerText = `${itemA} ${itemD} ${itemC} / ${itemB}`;
-                listElement.appendChild(li);
-            }
+        for (let i = 0; i < 5; i++) {
+            const itemA = listA[Math.floor(Math.random() * listA.length)];
+            const itemB = listB[Math.floor(Math.random() * listB.length)];
+            const itemC = listC[Math.floor(Math.random() * listC.length)];
+            const itemD = listD[Math.floor(Math.random() * listD.length)];
+
+            const li = document.createElement("li");
+            li.innerText = `${itemA} ${itemD} ${itemC} / ${itemB}`;
+            listElement.appendChild(li);
         }
-    </script>
-</body>
-</html>
+    }
+
+    generateButton.addEventListener("click", generate);
+</script>
