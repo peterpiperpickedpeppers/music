@@ -2,3 +2,10 @@
 ---
 
 @import "{{ site.theme }}";
+
+.generator-section {
+  margin-bottom: 40px;
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+}
