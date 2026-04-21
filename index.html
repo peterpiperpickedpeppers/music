@@ -33,7 +33,7 @@ title: Practice Drill Generator
 <script>
     // --- GEN 1 LOGIC ---
     const listA = ["C", "D", "Eb", "F", "G", "A", "Bb"];
-    const listB = ["1st Inv", "2nd Inv", "3rd Inv"];
+    const listB = ["Root", "1st Inv", "2nd Inv"];
     const listC = ["3rd Str", "4th Str", "5th Str", "6th Str"];
     const listD = ["Major", "Minor", "Diminished", "Whole"];
     
@@ -62,7 +62,7 @@ title: Practice Drill Generator
         "Bb Major": ["Bb Major", "C Minor", "D Minor", "Eb Major", "F Major", "G Minor", "A Diminished"]
     };
     const strings = ["3rd Str", "4th Str", "5th Str", "6th Str"];
-    const inversions = ["Root", "1st Inv", "2nd Inv", "3rd Inv"];
+    const inversions = ["Root", "1st Inv", "2nd Inv"];
 
     document.getElementById("generate-progression-btn").addEventListener("click", () => {
         const keys = Object.keys(keyData);
