@@ -3,37 +3,87 @@ layout: default
 title: Practice Drill Generator
 ---
 
-<button id="generate-button" type="button">Generate 5 Combos</button>
-<ul id="result">
-    <li>---</li>
-    <li>---</li>
-    <li>---</li>
-    <li>---</li>
-    <li>---</li>
-</ul>
+<style>
+    .generator-section { margin-bottom: 40px; padding: 20px; border: 1px solid #ddd; border-radius: 8px; }
+    hr { margin: 20px 0; }
+</style>
+
+<div class="generator-section">
+    <h2>Random Combo Generator</h2>
+    <button id="btn-combo" type="button">Generate 5 Combos</button>
+    <ul id="result-combo">
+        <li>---</li>
+        <li>---</li>
+        <li>---</li>
+        <li>---</li>
+        <li>---</li>
+    </ul>
+</div>
+
+<div class="generator-section">
+    <h2>Diatonic Progression Generator</h2>
+    <button id="btn-progression" type="button">Generate Progression</button>
+    <div id="key-display">Key: ---</div>
+    <ul id="result-progression">
+        <li>---</li>
+        <li>---</li>
+        <li>---</li>
+        <li>---</li>
+        <li>---</li>
+    </ul>
+</div>
 
 <script>
+    // --- GEN 1 LOGIC ---
     const listA = ["C", "D", "Eb", "F", "G", "A", "Bb"];
     const listB = ["1st Inv", "2nd Inv", "3rd Inv"];
     const listC = ["3rd Str", "4th Str", "5th Str", "6th Str"];
     const listD = ["Major", "Minor", "Diminished", "Whole"];
-    const generateButton = document.getElementById("generate-button");
-
-    function generate() {
-        const listElement = document.getElementById("result");
+    
+    document.getElementById("btn-combo").addEventListener("click", () => {
+        const listElement = document.getElementById("result-combo");
         listElement.innerHTML = "";
-
         for (let i = 0; i < 5; i++) {
             const itemA = listA[Math.floor(Math.random() * listA.length)];
             const itemB = listB[Math.floor(Math.random() * listB.length)];
             const itemC = listC[Math.floor(Math.random() * listC.length)];
             const itemD = listD[Math.floor(Math.random() * listD.length)];
-
             const li = document.createElement("li");
             li.innerText = `${itemA} ${itemD} ${itemC} / ${itemB}`;
             listElement.appendChild(li);
         }
-    }
+    });
 
-    generateButton.addEventListener("click", generate);
+    // --- GEN 2 LOGIC ---
+    const keyData = {
+        "C Major": ["C Major", "D Minor", "E Minor", "F Major", "G Major", "A Minor", "B Diminished"],
+        "D Major": ["D Major", "E Minor", "F# Minor", "G Major", "A Major", "B Minor", "C# Diminished"],
+        "Eb Major": ["Eb Major", "F Minor", "G Minor", "Ab Major", "Bb Major", "C Minor", "D Diminished"],
+        "F Major": ["F Major", "G Minor", "A Minor", "Bb Major", "C Major", "D Minor", "E Diminished"],
+        "G Major": ["G Major", "A Minor", "B Minor", "C Major", "D Major", "E Minor", "F# Diminished"],
+        "A Major": ["A Major", "B Minor", "C# Minor", "D Major", "E Major", "F# Minor", "G# Diminished"],
+        "Bb Major": ["Bb Major", "C Minor", "D Minor", "Eb Major", "F Major", "G Minor", "A Diminished"]
+    };
+    const strings = ["1st Str", "2nd Str", "3rd Str", "4th Str", "5th Str", "6th Str"];
+    const inversions = ["Root", "1st Inv", "2nd Inv", "3rd Inv"];
+
+    document.getElementById("btn-progression").addEventListener("click", () => {
+        const keys = Object.keys(keyData);
+        const randomKey = keys[Math.floor(Math.random() * keys.length)];
+        const chordsInKey = keyData[randomKey];
+        
+        document.getElementById("key-display").innerText = `Key: ${randomKey}`;
+        const listElement = document.getElementById("result-progression");
+        listElement.innerHTML = ""; 
+
+        for (let i = 0; i < 5; i++) {
+            const randomChord = chordsInKey[Math.floor(Math.random() * chordsInKey.length)];
+            const randomStr = strings[Math.floor(Math.random() * strings.length)];
+            const randomInv = inversions[Math.floor(Math.random() * inversions.length)];
+            
+            const li = document.createElement("li");
+            li.innerText = `${randomChord} (${randomStr} / ${randomInv})`;
+            listElement.appendChild(li);
+        }
+    });
 </script>
