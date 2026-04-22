@@ -108,6 +108,18 @@ li{
             <li>---</li>
         </ul>
     </section>
+  
+    <section class="generator-section">
+      <h2>Mode + String Pair Generator</h2>
+      <button id="generate-mode-string-btn" type="button">Generate 5 Unique Pairs</button>
+      <ul id="result-mode-string">
+        <li>---</li>
+        <li>---</li>
+        <li>---</li>
+        <li>---</li>
+        <li>---</li>
+      </ul>
+    </section>
 </main>
 
 <script>
@@ -164,5 +176,38 @@ li{
             li.innerText = `${randomChord} (${chosenStr} / ${randomInv})`;
             listElement.appendChild(li);
         }
+    });
+
+    // --- GEN 3 LOGIC (unique mode+string pairs) ---
+    const modes = ["Ionian", "Dorian", "Phrygian", "Lydian", "Mixolydian", "Aeolian", "Locrian"];
+    const modeStrings = ["1st Str", "2nd Str", "3rd Str", "4th Str", "5th Str", "6th Str"];
+    
+    function shuffleInPlace(arr) {
+      for (let i = arr.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [arr[i], arr[j]] = [arr[j], arr[i]];
+      }
+      return arr;
+    }
+    
+    document.getElementById("generate-mode-string-btn").addEventListener("click", () => {
+      const listElement = document.getElementById("result-mode-string");
+      listElement.innerHTML = "";
+    
+      // Build all possible pairs (7 * 6 = 42), shuffle, then take 5
+      const pairs = [];
+      for (const mode of modes) {
+        for (const str of modeStrings) {
+          pairs.push(`${mode} ${str}`);
+        }
+      }
+    
+      shuffleInPlace(pairs);
+    
+      for (let i = 0; i < 5; i++) {
+        const li = document.createElement("li");
+        li.innerText = pairs[i];
+        listElement.appendChild(li);
+      }
     });
 </script>
