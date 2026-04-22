@@ -120,6 +120,18 @@ li{
         <li>---</li>
       </ul>
     </section>
+  
+    <section class="generator-section">
+      <h2>Key + Mode Pair Generator</h2>
+      <button id="generate-key-mode-btn" type="button">Generate 5 Unique Pairs</button>
+      <ul id="result-key-mode">
+        <li>---</li>
+        <li>---</li>
+        <li>---</li>
+        <li>---</li>
+        <li>---</li>
+      </ul>
+    </section>
 </main>
 
 <script>
@@ -210,4 +222,34 @@ li{
         listElement.appendChild(li);
       }
     });
+
+    <script>
+      // --- GEN 4 LOGIC (unique key+mode pairs) ---
+      const keysA = ["C", "F", "Bb", "Eb", "G", "D", "A"];
+      // Reuse `modes` from GEN 3 if you already added it.
+      // If not, uncomment the next line:
+      // const modes = ["Ionian", "Dorian", "Phrygian", "Lydian", "Mixolydian", "Aeolian", "Locrian"];
+    
+      document.getElementById("generate-key-mode-btn").addEventListener("click", () => {
+        const listElement = document.getElementById("result-key-mode");
+        listElement.innerHTML = "";
+    
+        const pairs = [];
+        for (const key of keysA) {
+          for (const mode of modes) {
+            pairs.push(`${key} ${mode}`);
+          }
+        }
+    
+        // Reuse `shuffleInPlace` from GEN 3 if you already added it.
+        // If not, you can paste that function above this generator.
+        shuffleInPlace(pairs);
+    
+        for (let i = 0; i < 5; i++) {
+          const li = document.createElement("li");
+          li.innerText = pairs[i];
+          listElement.appendChild(li);
+        }
+      });
+    </script>
 </script>
